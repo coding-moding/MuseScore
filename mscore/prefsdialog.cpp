@@ -501,7 +501,9 @@ void PreferenceDialog::start()
       audioRelatedWidgets = std::vector<PreferenceItem*>{
                   new BoolPreferenceItem(PREF_IO_ALSA_USEALSAAUDIO, alsaDriver, doNothing),
                   new BoolPreferenceItem(PREF_IO_JACK_USEJACKAUDIO, useJackAudio, doNothing),
+#ifdef USE_PORTAUDIO
                   new BoolPreferenceItem(PREF_IO_PORTAUDIO_USEPORTAUDIO, portaudioDriver, doNothing),
+#endif
                   new BoolPreferenceItem(PREF_IO_PULSEAUDIO_USEPULSEAUDIO, pulseaudioDriver, doNothing),
                   new BoolPreferenceItem(PREF_IO_JACK_USEJACKMIDI, useJackMidi, doNothing),
                   new BoolPreferenceItem(PREF_IO_JACK_USEJACKTRANSPORT, useJackTransport, doNothing),
@@ -1426,7 +1428,9 @@ void PreferenceDialog::apply()
             else if (
                (wasJack != nowJack)
                || (preferences.getBool(PREF_IO_ALSA_USEALSAAUDIO) != alsaDriver->isChecked())
+#ifdef USE_PORTAUDIO
                || (preferences.getBool(PREF_IO_PORTAUDIO_USEPORTAUDIO) != portaudioDriver->isChecked())
+#endif
                || (preferences.getBool(PREF_IO_PULSEAUDIO_USEPULSEAUDIO) != pulseaudioDriver->isChecked())
       #ifdef USE_ALSA
                || (preferences.getString(PREF_IO_ALSA_DEVICE) != alsaDevice->text())
@@ -1436,7 +1440,9 @@ void PreferenceDialog::apply()
       #endif
                   ) {
                   preferences.setPreference(PREF_IO_ALSA_USEALSAAUDIO, alsaDriver->isChecked());
+#ifdef USE_PORTAUDIO
                   preferences.setPreference(PREF_IO_PORTAUDIO_USEPORTAUDIO, portaudioDriver->isChecked());
+#endif
                   preferences.setPreference(PREF_IO_PULSEAUDIO_USEPULSEAUDIO, pulseaudioDriver->isChecked());
       #ifdef USE_ALSA
                   preferences.setPreference(PREF_IO_ALSA_DEVICE, alsaDevice->text());

@@ -80,8 +80,8 @@ ExportDialog::ExportDialog(Score* s, QWidget* parent)
       Q_ASSERT(fileTypeComboBoxModel != nullptr);
 # ifndef USE_LAME
       // Disable .mp3 option if unavailable
-      QStandardItem* mp3Item = fileTypeComboBoxModel->item(3);
-      mp3Item->setFlags(audioItem->flags() & ~Qt::ItemIsEnabled);
+      QStandardItem* audioItem = fileTypeComboBoxModel->item(3);
+      audioItem->setFlags(audioItem->flags() & ~Qt::ItemIsEnabled);
 # endif
 # ifndef HAS_AUDIOFILE
       // Disable .wav, .flac and .ogg options if unavailable
